@@ -1,0 +1,94 @@
+<mvc:View controllerName="Maintenance_Request_APPROVER_TWO.Maintenance_Request_APPROVER_TWO.controller.View1" xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified">
+	<!--<Shell id="shell">-->
+	<App id="app">
+		<pages>
+			<Page showHeader="false" showFooter="false">
+				<content>
+					<BusyDialog id="idBsyDialog"></BusyDialog>
+					<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+						<items>
+							<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>Info}">
+								<ScrollContainer height="100%" width="100%" horizontal="true" vertical="true" class="scrollcontainerclass">
+									<f:SimpleForm id="SimpleFormChange354" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
+										labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+										singleContainerFullSize="false">
+										<f:content>
+											<Label text="{i18n>Inicio}"/>
+											<Select id="category" selectedKey="{/category}">
+												<items>
+													<core:Item text="Crear Orden de Mantenimiento" key="{i18n>Crear Orden de Mantenimiento}"/>
+													<core:Item text="Solicitar Suministros de Oficina" key="{i18n>Solicitar Suministros de Oficina}"/>
+												</items>
+											</Select>
+											<Label text="{i18n>Descripción del Trabajo}"/>
+											<TextArea cols="10" rows="6" value="{/description}"></TextArea>
+											<Label text="{i18n>Tipo de Trabajo}"/>
+											<Select id="typeofwork" selectedKey="{/typeofwork}">
+												<items>
+													<core:Item text="Herrería" key="{i18n>Herrería}"/>
+													<core:Item text="Obra Gris" key="{i18n>Obra Gris}"/>
+													<core:Item text="Aplicación de Pintura" key="{i18n>Aplicación de Pintura}"/>
+													<core:Item text="Compra de Pintura" key="{i18n>Compra de Pintura}"/>
+													<core:Item text="Plomería" key="{i18n>Plomería}"/>
+													<core:Item text="Tabla Yeso" key="{i18n>Tabla Yeso}"/>
+													<core:Item text="Polarizado" key="{i18n>Polarizado}"/>
+													<core:Item text="Aluminios y Vidrios" key="{i18n>Aluminios y Vidrios}"/>
+												</items>
+											</Select>
+											<!--<Label text="{i18n>}"/>
+								<u:FileUploader id="fileUploader" name="myFileUpload" uploadComplete="handleUploadComplete"/>
+								<Label text="{i18n>Archivos Adjuntos}"/>
+								<List id="listoffiles" items="">
+									<StandardListItem title="{Name}" counter="{Link}"/>
+								</List>-->
+										</f:content>
+									</f:SimpleForm>
+								</ScrollContainer>
+							</IconTabFilter>
+							<IconTabFilter id="iconTabBarFilter2" icon="sap-icon://attachment" tooltip="{i18n>Attachments}">
+								<u:FileUploader tooltip="Upload your file to the local server" id="idScreenshot" change="onChange" name="myFileUpload"
+									placeholder="Browse and Upload Files" buttonText="Browse" uploadStart="handleUploadStart" uploadProgress="handleUploadProgress"
+									uploadComplete="handleUploadCompletePic" class="uploadClass" width="30%"/>
+								<Table id="idDetailPicTable" inset="true" items="{/Documents/screenshotcol}" class="tableClass">
+									<columns>
+										<Column ><Text text="Name"/></Column>
+										<Column ><Text text="Url"/></Column>
+										<Column ><Text text="Uploaded By"/></Column>
+									</columns>
+									<items>
+										<ColumnListItem >
+											<cells >
+												<!--<ObjectHeader title="{PicModel>name}" icon="{path:'PicModel>url', formatter: 'CreateIssue.controller.Formatter.picPath'}"/>-->
+												<!--<Link text="{path:'PicModel>name', formatter: 'CreateIssue.controller.Formatter.name'}" press="onPress"></Link>
+									<Link text="{path:'PicModel>name', formatter: 'CreateIssue.controller.Formatter.name'}" press="onPress"></Link>-->
+												<Text text="{name}"/>
+												<Link text="url"
+													href="{path:'url', formatter: 'Maintenance_Request_APPROVER_TWO.Maintenance_Request_APPROVER_TWO.controller.Formatter.picPath'}"
+													target="_blank"></Link>
+												<Text text="{Role}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</IconTabFilter>
+							<IconTabFilter id="iconTabBarFilter3" icon="sap-icon://discussion" tooltip="{i18n>Comments}">
+								<ScrollContainer height="100%" width="100%" horizontal="true" vertical="true" class="scrollcontainerclass">
+									<FeedInput post="onPostComments" class="sapUiSmallMarginTopBottom" id="feedinput"/>
+									<List showSeparators="Inner" items="{/Comments/comments}">
+										<FeedListItem iconDensityAware="false"
+											timestamp="{path:'DATETIME' , formatter: 'Maintenance_Request_APPROVER_TWO.Maintenance_Request_APPROVER_TWO.controller.Formatter.datetrim'}"
+											text="{COMMENTS}" sender="{REPORTER}"/>
+										<!--info="{REPORTERID}"-->
+										<!--{path:'IssueCommentsModel>DATETIME' , formatter: 'com.sap.se.githubissuesgithubissues.controller.Formatter.datetrim'}-->
+									</List>
+								</ScrollContainer>
+							</IconTabFilter>
+						</items>
+					</IconTabBar>
+				</content>
+			</Page>
+		</pages>
+	</App>
+	<!--</Shell>-->
+</mvc:View>

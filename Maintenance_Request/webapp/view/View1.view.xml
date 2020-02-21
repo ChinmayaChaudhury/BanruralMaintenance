@@ -1,0 +1,40 @@
+<mvc:View controllerName="Maintenance_Request.Maintenance_Request.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+	xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page title="Maintenance Request" titleAlignment="Center" showHeader="false">
+					<content>
+						<!--<VBox width="100%" direction="Column" id="__vbox0">-->
+						<!--	<items>-->
+						<VBox class="sapUiSmallMargin">
+							<f:SimpleForm id="SimpleFormChange354" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
+								labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+								singleContainerFullSize="false">
+								<f:content>
+									<Label text="{i18n>Inicio}"/>
+									<Select id="category" selectedKey="{/category}">
+										<items>
+											<core:Item text="Crear Orden de Mantenimiento" key="{i18n>Crear Orden de Mantenimiento}"/>
+											<core:Item text="Solicitar Suministros de Oficina" key="{i18n>Solicitar Suministros de Oficina}"/>
+										</items>
+									</Select>
+									<Label text="{i18n>Descripción del Trabajo}"/>
+									<TextArea cols="10" rows="6" value="{/description}"></TextArea>
+								</f:content>
+							</f:SimpleForm>
+						</VBox>
+						<!--</items>-->
+						<!--</VBox>-->
+					</content>
+					<footer>
+						<Toolbar>
+							<ToolbarSpacer/>
+							<Button type="Accept" text="{i18n>Enviar}" press="startWorkflow"></Button>
+						</Toolbar>
+					</footer>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

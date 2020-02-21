@@ -1,0 +1,180 @@
+ID: Banrural_WF_NEW
+_schema-version: '2.1'
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+version: 0.0.1
+modules:
+  - name: Banrural_WF_NEW_appRouter
+    type: approuter.nodejs
+    path: Banrural_WF_NEW_appRouter
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: Banrural_WF_NEW_html5_repo_runtime
+      - name: portal_resources_Banrural_WF_NEW
+      - name: workflow-instance-dbr
+      - name: dest_Banrural_WF_NEW
+      - name: uaa_Banrural_WF_NEW
+      - name: sdcplatformpv
+  - name: Banrural_WF_NEW_ui_deployer
+    type: com.sap.html5.application-content
+    path: Banrural_WF_NEW_ui_deployer
+    requires:
+      - name: Banrural_WF_NEW_html5_repo_host
+    build-parameters:
+      requires:
+        - name: Maintenance_Request
+          artifacts:
+            - './*'
+          target-path: resources/Maintenance_Request
+        - name: Maintenance_Request_APPROVER_ONE
+          artifacts:
+            - './*'
+          target-path: resources/Maintenance_Request_APPROVER_ONE
+        - name: Maintenance_Request_APPROVER_TWO
+          artifacts:
+            - './*'
+          target-path: resources/Maintenance_Request_APPROVER_TWO
+        - name: Maintenance_Request_APPROVER_THREE
+          artifacts:
+            - './*'
+          target-path: resources/Maintenance_Request_APPROVER_THREE
+        - name: Maintenance_Request_APPROVER_FOUR
+          artifacts:
+            - './*'
+          target-path: resources/Maintenance_Request_APPROVER_FOUR
+        - name: Maintenance_Request_APPROVER_FIVE
+          artifacts:
+            - './*'
+          target-path: resources/Maintenance_Request_APPROVER_FIVE
+        - name: Maintenance_Request_APPROVER_SIX
+          artifacts:
+            - './*'
+          target-path: resources/Maintenance_Request_APPROVER_SIX
+        - name: Maintenance_Request_APPROVER_SEVEN
+          artifacts:
+            - './*'
+          target-path: resources/Maintenance_Request_APPROVER_SEVEN
+        - name: Maintenance_Request_APPROVER_EIGHT
+          artifacts:
+            - './*'
+          target-path: resources/Maintenance_Request_APPROVER_EIGHT
+  - name: Banrural_WF
+    type: com.sap.application.content
+    path: Banrural_WF
+    requires:
+      - name: workflow-instance-dbr
+        parameters:
+          content-target: true
+  - name: Maintenance_Request
+    type: html5
+    path: Maintenance_Request
+    build-parameters:
+      builder: grunt
+      supported-platforms: []
+      build-result: dist
+  - name: Banrural_FLP
+    type: com.sap.portal.content
+    path: Banrural_FLP
+    parameters:
+      stack: cflinuxfs3
+      memory: 128M
+      buildpack: 'https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.6.39/nodejs-buildpack-cflinuxfs3-v1.6.39.zip'
+    requires:
+      - name: portal_resources_Banrural_WF_NEW
+      - name: workflow-instance-dbr
+      - name: uaa_Banrural_WF_NEW
+      - name: Banrural_WF_NEW_html5_repo_host
+      - name: Banrural_WF_NEW_ui_deployer
+      - name: sdcplatformpv 
+  - name: Maintenance_Request_APPROVER_ONE
+    type: html5
+    path: Maintenance_Request_APPROVER_ONE
+    build-parameters:
+      builder: grunt
+      supported-platforms: []
+      build-result: dist
+  - name: Maintenance_Request_APPROVER_TWO
+    type: html5
+    path: Maintenance_Request_APPROVER_TWO
+    build-parameters:
+      builder: grunt
+      supported-platforms: []
+      build-result: dist
+  - name: Maintenance_Request_APPROVER_THREE
+    type: html5
+    path: Maintenance_Request_APPROVER_THREE
+    build-parameters:
+      builder: grunt
+      supported-platforms: []
+      build-result: dist
+  - name: Maintenance_Request_APPROVER_FOUR
+    type: html5
+    path: Maintenance_Request_APPROVER_FOUR
+    build-parameters:
+      builder: grunt
+      supported-platforms: []
+      build-result: dist
+  - name: Maintenance_Request_APPROVER_FIVE
+    type: html5
+    path: Maintenance_Request_APPROVER_FIVE
+    build-parameters:
+      builder: grunt
+      supported-platforms: []
+      build-result: dist
+  - name: Maintenance_Request_APPROVER_SIX
+    type: html5
+    path: Maintenance_Request_APPROVER_SIX
+    build-parameters:
+      builder: grunt
+      supported-platforms: []
+      build-result: dist
+  - name: Maintenance_Request_APPROVER_SEVEN
+    type: html5
+    path: Maintenance_Request_APPROVER_SEVEN
+    build-parameters:
+      builder: grunt
+      supported-platforms: []
+      build-result: dist
+  - name: Maintenance_Request_APPROVER_EIGHT
+    type: html5
+    path: Maintenance_Request_APPROVER_EIGHT
+    build-parameters:
+      builder: grunt
+      supported-platforms: []
+      build-result: dist
+resources:
+  - name: Banrural_WF_NEW_html5_repo_runtime
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: Banrural_WF_NEW_html5_repo_host
+    parameters:
+      service-plan: app-host
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: workflow-instance-dbr
+    type: org.cloudfoundry.existing-service
+  - name: uaa_Banrural_WF_NEW
+    parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
+    type: org.cloudfoundry.managed-service
+  - name: dest_TESTINGCCGMTA
+    type: org.cloudfoundry.existing-service
+  - name: portal_resources_Banrural_WF_NEW
+    parameters:
+      service-plan: standard
+      service: portal
+    type: org.cloudfoundry.managed-service
+  - name: dest_Banrural_WF_NEW
+    parameters:
+      service-plan: lite
+      service: destination
+    type: org.cloudfoundry.managed-service
+  - name: sdcplatformpv
+    type: org.cloudfoundry.existing-service
